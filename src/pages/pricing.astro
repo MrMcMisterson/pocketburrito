@@ -1,0 +1,248 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { lightTierGames, mediumTierGames } from '../data/games';
+---
+
+<Layout title="Pricing - PocketBurrito" description="Transparent pricing for all game server hosting. Starting from $6.99/month with no hidden fees.">
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-gaming-dark to-gaming-darker py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl sm:text-6xl font-gaming font-bold text-white mb-4">
+        Simple, Transparent Pricing
+      </h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        No hidden fees. No setup costs. Cancel anytime. All plans include DDoS protection and daily backups.
+      </p>
+    </div>
+  </section>
+
+  <!-- Light Tier Pricing -->
+  <section class="py-16 bg-gaming-darker">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-gaming font-bold text-white mb-2">Light Tier Games</h2>
+        <p class="text-gray-400">Perfect for small groups • 2-4GB RAM</p>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead class="bg-gaming-dark border-b border-gray-700">
+            <tr>
+              <th class="px-6 py-4 text-white font-semibold">Game</th>
+              <th class="px-6 py-4 text-white font-semibold">Max Players</th>
+              <th class="px-6 py-4 text-white font-semibold">RAM</th>
+              <th class="px-6 py-4 text-white font-semibold">Price/Month</th>
+              <th class="px-6 py-4 text-white font-semibold"></th>
+            </tr>
+          </thead>
+          <tbody class="bg-gaming-dark/50">
+            {lightTierGames.map((game, index) => (
+              <tr class={index % 2 === 0 ? 'bg-gaming-dark/30' : ''}>
+                <td class="px-6 py-4 text-white font-medium">{game.name}</td>
+                <td class="px-6 py-4 text-gray-300">{game.maxPlayers}</td>
+                <td class="px-6 py-4 text-gray-300">{game.ram}</td>
+                <td class="px-6 py-4 text-gaming-accent font-bold text-lg">${game.price}</td>
+                <td class="px-6 py-4">
+                  <a href={`/games/${game.slug}`} class="text-gaming-accent hover:text-gaming-purple transition">
+                    View Details →
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Medium Tier Pricing -->
+  <section class="py-16 bg-gaming-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-gaming font-bold text-white mb-2">Medium Tier Games</h2>
+        <p class="text-gray-400">Popular games with flexible scaling • Multiple player tiers</p>
+      </div>
+
+      <div class="space-y-8">
+        {mediumTierGames.map(game => (
+          <div class="bg-gaming-darker border border-gray-800 rounded-xl overflow-hidden hover:border-gaming-purple transition">
+            <div class="p-6 bg-gaming-dark border-b border-gray-800">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="text-2xl font-gaming font-bold text-white mb-1">{game.name}</h3>
+                  <p class="text-gray-400">{game.description}</p>
+                </div>
+                <a href={`/games/${game.slug}`} class="text-gaming-purple hover:text-gaming-pink transition">
+                  Details →
+                </a>
+              </div>
+            </div>
+            
+            {game.tiers ? (
+              <div class="p-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {game.tiers.map((tier, index) => (
+                    <div class={`border rounded-lg p-4 ${
+                      index === 1 ? 'border-gaming-accent bg-gaming-accent/5' : 'border-gray-700'
+                    }`}>
+                      {index === 1 && (
+                        <div class="text-xs font-semibold text-gaming-accent mb-2">POPULAR</div>
+                      )}
+                      <div class="text-2xl font-bold text-white mb-1">${tier.price}</div>
+                      <div class="text-sm text-gray-400 mb-3">per month</div>
+                      <div class="space-y-1 text-sm">
+                        <div class="text-gray-300">{tier.players} Players</div>
+                        <div class="text-gray-400">{tier.ram} RAM</div>
+                      </div>
+                      <a href={`https://billing.pocketburrito.ca/order/${game.slug}-${tier.ram.toLowerCase()}`} 
+                         class="mt-4 block text-center bg-gaming-accent hover:bg-gaming-purple text-white py-2 px-4 rounded font-semibold text-sm transition">
+                        Order
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div class="p-6">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <span class="text-3xl font-bold text-white">${game.price}</span>
+                    <span class="text-gray-400">/month</span>
+                    <div class="text-sm text-gray-400 mt-1">Up to {game.maxPlayers} players • {game.ram}</div>
+                  </div>
+                  <a href={`https://billing.pocketburrito.ca/order/${game.slug}`} 
+                     class="bg-gaming-accent hover:bg-gaming-purple text-white py-3 px-6 rounded-lg font-semibold transition">
+                    Order Now
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="py-16 bg-gaming-darker">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-gaming font-bold text-white mb-12 text-center">
+        Included With Every Plan
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-accent to-gaming-purple rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Instant Setup</h3>
+          <p class="text-gray-400">Server provisioned in under 60 seconds</p>
+        </div>
+
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-purple to-gaming-pink rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">DDoS Protection</h3>
+          <p class="text-gray-400">Enterprise-grade protection included</p>
+        </div>
+
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-pink to-gaming-accent rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Daily Backups</h3>
+          <p class="text-gray-400">Automated backups every 24 hours</p>
+        </div>
+
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-accent to-gaming-purple rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Full Control Panel</h3>
+          <p class="text-gray-400">Web-based file manager and console</p>
+        </div>
+
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-purple to-gaming-pink rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">24/7 Support</h3>
+          <p class="text-gray-400">Discord and ticket support available</p>
+        </div>
+
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-pink to-gaming-accent rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Mod Support</h3>
+          <p class="text-gray-400">One-click mod installation available</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 bg-gaming-dark">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-gaming font-bold text-white mb-12 text-center">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="space-y-6">
+        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-white mb-2">Are there any setup fees?</h3>
+          <p class="text-gray-400">No, there are no setup fees. You only pay the monthly price.</p>
+        </div>
+
+        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-white mb-2">Can I upgrade or downgrade my plan?</h3>
+          <p class="text-gray-400">Yes, you can change your plan at any time from the control panel.</p>
+        </div>
+
+        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-white mb-2">What payment methods do you accept?</h3>
+          <p class="text-gray-400">We accept credit cards, PayPal, and cryptocurrency.</p>
+        </div>
+
+        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-white mb-2">Do you offer refunds?</h3>
+          <p class="text-gray-400">Yes, we offer a 48-hour money-back guarantee on all new orders.</p>
+        </div>
+
+        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-white mb-2">Can I cancel anytime?</h3>
+          <p class="text-gray-400">Yes, you can cancel your server at any time with no cancellation fees.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-r from-gaming-accent to-gaming-purple">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-5xl font-gaming font-bold text-white mb-6">
+        Ready to Get Started?
+      </h2>
+      <p class="text-xl text-white/90 mb-8">
+        Choose your game and start playing in under 60 seconds.
+      </p>
+      <a href="https://billing.pocketburrito.ca" class="inline-block bg-white text-gaming-accent px-10 py-4 rounded-lg text-lg font-bold hover:shadow-2xl hover:scale-105 transition">
+        Order Your Server
+      </a>
+    </div>
+  </section>
+</Layout>

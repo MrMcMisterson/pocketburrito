@@ -1,0 +1,212 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { lightTierGames, mediumTierGames } from '../data/games';
+
+const featuredGames = [
+  ...lightTierGames.slice(0, 3),
+  ...mediumTierGames.slice(0, 3)
+];
+---
+
+<Layout title="PocketBurrito - Premium Game Server Hosting">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-gaming-dark to-gaming-darker">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 relative">
+      <div class="text-center">
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-gaming font-bold mb-6">
+          <span class="bg-gradient-to-r from-gaming-accent via-gaming-purple to-gaming-pink bg-clip-text text-transparent">
+            Premium Game Server
+          </span>
+          <br />
+          <span class="text-white">Hosting Made Easy</span>
+        </h1>
+        
+        <p class="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          Instant setup. DDoS protection. 24/7 support. Host Minecraft, Valheim, Terraria, and 10+ popular games.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://billing.pocketburrito.ca" class="bg-gradient-to-r from-gaming-accent to-gaming-purple text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-2xl hover:shadow-gaming-accent/50 transition transform hover:scale-105">
+            Order Your Server Now
+          </a>
+          <a href="/games" class="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-lg text-lg font-semibold border border-white/20 hover:bg-white/20 transition">
+            Browse Games
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-4xl mx-auto">
+          <div class="text-center">
+            <div class="text-4xl font-gaming font-bold text-gaming-accent mb-2">99.9%</div>
+            <div class="text-gray-400">Uptime</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-gaming font-bold text-gaming-purple mb-2">15+</div>
+            <div class="text-gray-400">Games</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-gaming font-bold text-gaming-pink mb-2">24/7</div>
+            <div class="text-gray-400">Support</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-gaming font-bold text-gaming-accent mb-2">< 60s</div>
+            <div class="text-gray-400">Setup Time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 bg-gaming-darker">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-5xl font-gaming font-bold text-white mb-4">
+          Why Choose PocketBurrito?
+        </h2>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+          Everything you need to run the perfect game server
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-gaming-dark border border-gray-800 rounded-xl p-6 hover:border-gaming-accent transition group">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-accent to-gaming-purple rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Instant Setup</h3>
+          <p class="text-gray-400">Your server is ready in under 60 seconds. No technical knowledge required.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-gaming-dark border border-gray-800 rounded-xl p-6 hover:border-gaming-purple transition group">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-purple to-gaming-pink rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">DDoS Protected</h3>
+          <p class="text-gray-400">Enterprise-grade DDoS protection keeps your server online 24/7.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-gaming-dark border border-gray-800 rounded-xl p-6 hover:border-gaming-pink transition group">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-pink to-gaming-accent rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Daily Backups</h3>
+          <p class="text-gray-400">Automatic daily backups ensure your world is never lost.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-gaming-dark border border-gray-800 rounded-xl p-6 hover:border-gaming-accent transition group">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-accent to-gaming-purple rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Full Control Panel</h3>
+          <p class="text-gray-400">Manage files, console, backups, and more from our intuitive panel.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="bg-gaming-dark border border-gray-800 rounded-xl p-6 hover:border-gaming-purple transition group">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-purple to-gaming-pink rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Mod Support</h3>
+          <p class="text-gray-400">Install mods with one click. Full modpack support included.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="bg-gaming-dark border border-gray-800 rounded-xl p-6 hover:border-gaming-pink transition group">
+          <div class="w-12 h-12 bg-gradient-to-br from-gaming-pink to-gaming-accent rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">24/7 Support</h3>
+          <p class="text-gray-400">Expert support team available around the clock via Discord and tickets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Games Section -->
+  <section class="py-20 bg-gaming-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-5xl font-gaming font-bold text-white mb-4">
+          Popular Game Servers
+        </h2>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+          Host your favorite games with just a few clicks
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredGames.map(game => (
+          <a href={`/games/${game.slug}`} class="group bg-gaming-darker border border-gray-800 rounded-xl overflow-hidden hover:border-gaming-accent transition-all hover:shadow-xl hover:shadow-gaming-accent/20">
+            <div class="relative h-48 overflow-hidden">
+              <img 
+                src={game.imageUrl} 
+                alt={game.name}
+                class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-gaming-darker via-gaming-darker/50 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4">
+                <h3 class="text-2xl font-gaming font-bold text-white mb-1">{game.name}</h3>
+                <p class="text-gray-300 text-sm">Up to {game.maxPlayers || game.tiers?.[0].players} players</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-400 mb-4 line-clamp-2">{game.description}</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-2xl font-bold text-white">
+                    ${game.price || game.tiers?.[0].price}
+                  </span>
+                  <span class="text-gray-400">/month</span>
+                </div>
+                <span class="text-gaming-accent group-hover:translate-x-1 transition">
+                  View Plans →
+                </span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/games" class="inline-block bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-lg text-lg font-semibold border border-white/20 hover:bg-white/20 transition">
+          View All 15+ Games
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-r from-gaming-accent via-gaming-purple to-gaming-pink">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-5xl font-gaming font-bold text-white mb-6">
+        Ready to Start Gaming?
+      </h2>
+      <p class="text-xl text-white/90 mb-8">
+        Join thousands of gamers hosting their servers with us. Setup takes less than 60 seconds.
+      </p>
+      <a href="https://billing.pocketburrito.ca" class="inline-block bg-white text-gaming-accent px-10 py-4 rounded-lg text-lg font-bold hover:shadow-2xl hover:scale-105 transition">
+        Create Your Server Now
+      </a>
+    </div>
+  </section>
+</Layout>

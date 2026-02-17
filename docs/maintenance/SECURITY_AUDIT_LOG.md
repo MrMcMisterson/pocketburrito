@@ -61,7 +61,7 @@ Overall security posture: **MODERATE** - Basic security is in place but several 
 | MySQL (3306) | 127.0.0.1 only | GOOD |
 | Redis (6379) | 127.0.0.1 only | GOOD |
 
-**Port 8080** is open in UFW but nothing appears to be listening on it. Should be removed if not needed.
+**Port 8080** is required for Pterodactyl Wings daemon.
 
 ---
 

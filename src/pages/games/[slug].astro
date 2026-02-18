@@ -85,10 +85,10 @@ const hasMultipleTiers = game.tiers && game.tiers.length > 1;
                 </div>
               </div>
 
-              <a href={`https://billing.pocketburrito.ca/order/${game.slug}-${tier.ram.toLowerCase()}`} 
+              <a href={`https://billing.pocketburrito.ca/products/game-servers/${game.slug}/checkout`}
                  class={`block text-center py-3 px-6 rounded-lg font-semibold transition ${
-                   index === 1 
-                     ? 'bg-gradient-to-r from-gaming-accent to-gaming-purple text-white hover:shadow-xl' 
+                   index === 1
+                     ? 'bg-gradient-to-r from-gaming-accent to-gaming-purple text-white hover:shadow-xl'
                      : 'bg-white/10 text-white hover:bg-white/20'
                  }`}>
                 Order Now
@@ -103,22 +103,22 @@ const hasMultipleTiers = game.tiers && game.tiers.length > 1;
               BEST VALUE
             </div>
             <div class="mb-6">
-              <div class="text-5xl font-bold text-white mb-2">${game.price}</div>
+              <div class="text-5xl font-bold text-white mb-2">${game.tiers?.[0]?.price ?? game.price}</div>
               <div class="text-gray-400">per month</div>
             </div>
-            
+
             <div class="space-y-3 mb-8">
               <div class="flex items-center text-gray-300">
                 <svg class="w-5 h-5 text-gaming-accent mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span>Up to {game.maxPlayers} Players</span>
+                <span>Up to {game.tiers?.[0]?.players ?? game.maxPlayers} Players</span>
               </div>
               <div class="flex items-center text-gray-300">
                 <svg class="w-5 h-5 text-gaming-accent mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span>{game.ram} RAM</span>
+                <span>{game.tiers?.[0]?.ram ?? game.ram} RAM</span>
               </div>
               <div class="flex items-center text-gray-300">
                 <svg class="w-5 h-5 text-gaming-accent mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -140,7 +140,7 @@ const hasMultipleTiers = game.tiers && game.tiers.length > 1;
               </div>
             </div>
 
-            <a href={`https://billing.pocketburrito.ca/order/${game.slug}`} 
+            <a href={`https://billing.pocketburrito.ca/products/game-servers/${game.slug}/checkout`}
                class="block text-center bg-gradient-to-r from-gaming-accent to-gaming-purple text-white py-4 px-8 rounded-lg font-bold text-lg hover:shadow-2xl hover:shadow-gaming-accent/50 transition">
               Order Your Server
             </a>
@@ -247,7 +247,7 @@ const hasMultipleTiers = game.tiers && game.tiers.length > 1;
       <p class="text-xl text-white/90 mb-8">
         Setup takes less than 60 seconds. No technical knowledge required.
       </p>
-      <a href={`https://billing.pocketburrito.ca/order/${game.slug}`} class="inline-block bg-white text-gaming-accent px-10 py-4 rounded-lg text-lg font-bold hover:shadow-2xl hover:scale-105 transition">
+      <a href={`https://billing.pocketburrito.ca/products/game-servers/${game.slug}/checkout`} class="inline-block bg-white text-gaming-accent px-10 py-4 rounded-lg text-lg font-bold hover:shadow-2xl hover:scale-105 transition">
         Order Now
       </a>
     </div>

@@ -10,10 +10,11 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Tests | 45 |
-| Passed | 37 |
-| Failed | 5 |
+| Total Tests | 87 |
+| Passed | 71 |
+| Failed | 8 |
 | Needs Investigation | 3 |
+| Skipped (Auth Required) | 5 |
 | Pass Rate | 82% |
 
 ---
@@ -40,7 +41,15 @@
 - **Impact:** Billing footer links to a non-existent Twitter account.
 - **Fix:** Remove Twitter link from billing theme footer, or create the Twitter account.
 
-### Issue 4: Link Mapping Documentation Outdated (LOW)
+### Issue 4: Valheim Checkout Redirects to Empty Cart (MEDIUM)
+- **URL:** https://billing.pocketburrito.ca/products/game-servers/valheim/checkout
+- **Expected:** Checkout page with Valheim server plan ($14.99)
+- **Actual:** 302 redirect to /cart which shows "Your cart is empty"
+- **Cause:** Valheim is the only single-tier product (no ConfigOptions, direct plan at $14.99). Paymenter may handle direct-checkout differently for products without config options.
+- **Impact:** Customers clicking "Order Now" on Valheim game page cannot complete checkout.
+- **Fix:** Investigate Paymenter checkout flow for single-plan products. May need to add a ConfigOption or adjust checkout routing.
+
+### Issue 5: Link Mapping Documentation Outdated (LOW)
 - **docs/maintenance/LINK_MAPPING.md** line 61-62 references:
   - `https://billing.pocketburrito.ca/order/{slug}`
   - `https://billing.pocketburrito.ca/order/{slug}-{tier}`
@@ -115,8 +124,8 @@
 | 27 | Login page loads | billing.pocketburrito.ca/login | PASS | Email, password, remember me, forgot password link |
 | 28 | Register page loads | billing.pocketburrito.ca/register | PASS | All fields present (name, email, phone, address, etc.) |
 | 29 | Homepage redirect | billing.pocketburrito.ca/ | PASS | 301 redirect to pocketburrito.ca |
-| 30 | Products redirect | billing.pocketburrito.ca/products/game-servers | NEEDS CHECK | Should redirect to pocketburrito.ca/games |
-| 31 | Slug redirect | billing.pocketburrito.ca/products/game-servers/minecraft | NEEDS CHECK | Should redirect to pocketburrito.ca/games/minecraft |
+| 30 | Products redirect | billing.pocketburrito.ca/products/game-servers | PASS | 301 redirect to pocketburrito.ca/games confirmed |
+| 31 | Slug redirect | billing.pocketburrito.ca/products/game-servers/minecraft | PASS | 301 redirect to pocketburrito.ca/games/minecraft confirmed |
 | 32 | Admin login | billing.pocketburrito.ca/admin | PASS | Shows login form (not accessible without auth) |
 
 ### Checkout Page Tests
@@ -125,7 +134,7 @@
 |---|------|------|--------|-------|
 | 33 | Minecraft checkout | /products/game-servers/minecraft/checkout | PASS | Shows 5 tiers, prices, checkout button |
 | 34 | Terraria checkout | /products/game-servers/terraria/checkout | PASS | Shows 3 tiers, prices correct |
-| 35 | Valheim checkout | /products/game-servers/valheim/checkout | NEEDS CHECK | Showed "cart empty" on first test (may need auth) |
+| 35 | Valheim checkout | /products/game-servers/valheim/checkout | FAIL | 302 redirect to /cart (empty cart). Single-tier product checkout broken (see Issue 4) |
 | 36 | Garry's Mod checkout | /products/game-servers/garrys-mod/checkout | PASS | Structure present, Livewire loads |
 
 ### Panel Tests
@@ -140,8 +149,8 @@
 | # | Test | From | To | Result |
 |---|------|------|----|--------|
 | 39 | Root redirect | billing.pocketburrito.ca/ | pocketburrito.ca | PASS (301) |
-| 40 | Products redirect | billing.pocketburrito.ca/products/game-servers | pocketburrito.ca/games | NEEDS CHECK |
-| 41 | Slug redirect | billing.pocketburrito.ca/products/game-servers/minecraft | pocketburrito.ca/games/minecraft | NEEDS CHECK |
+| 40 | Products redirect | billing.pocketburrito.ca/products/game-servers | pocketburrito.ca/games | PASS (301) |
+| 41 | Slug redirect | billing.pocketburrito.ca/products/game-servers/minecraft | pocketburrito.ca/games/minecraft | PASS (301) |
 | 42 | Checkout preserved | billing.pocketburrito.ca/products/game-servers/minecraft/checkout | NOT redirected | PASS |
 
 ### Cross-Site Consistency Tests
@@ -159,16 +168,97 @@
 | Priority | Title | Issue # |
 |----------|-------|---------|
 | CRITICAL | Missing legal pages (/terms, /privacy, /refund) serve homepage instead of content | #39 |
+| CRITICAL | ARK checkout 404 - slug mismatch (Astro: ark-survival-evolved, Paymenter: ark) | #43 |
+| MEDIUM | Valheim checkout redirects to empty cart instead of checkout page | #44 |
 | MEDIUM | Refund URL mismatch: /refund (Astro) vs /refunds (billing theme) | #40 |
 | MEDIUM | Twitter link in billing theme footer links to non-existent account | #41 |
 | LOW | Link mapping documentation outdated - references old URL pattern | #42 |
 
 ---
 
+## All 16 Checkout URL Tests
+
+| # | Game | Slug | HTTP Code | Result | Notes |
+|---|------|------|-----------|--------|-------|
+| 46 | Minecraft | minecraft | 200 | PASS | Checkout page loads |
+| 47 | Valheim | valheim | 302 | FAIL | Redirects to /cart (empty). Single-tier product issue |
+| 48 | Palworld | palworld | 200 | PASS | Checkout page loads |
+| 49 | Project Zomboid | project-zomboid | 200 | PASS | Checkout page loads |
+| 50 | Enshrouded | enshrouded | 200 | PASS | Checkout page loads |
+| 51 | 7 Days to Die | 7-days-to-die | 200 | PASS | Checkout page loads |
+| 52 | Sons of the Forest | sons-of-the-forest | 200 | PASS | Checkout page loads |
+| 53 | Rust | rust | 200 | PASS | Checkout page loads |
+| 54 | ARK: Survival Evolved | ark-survival-evolved | 404 | FAIL | Slug mismatch with Paymenter (see Issue #43) |
+| 55 | V Rising | v-rising | 200 | PASS | Checkout page loads |
+| 56 | Terraria | terraria | 200 | PASS | Checkout page loads |
+| 57 | Satisfactory | satisfactory | 200 | PASS | Checkout page loads |
+| 58 | Factorio | factorio | 200 | PASS | Checkout page loads |
+| 59 | Core Keeper | core-keeper | 200 | PASS | Checkout page loads |
+| 60 | ECO | eco | 200 | PASS | Checkout page loads |
+| 61 | Garry's Mod | garrys-mod | 200 | PASS | Checkout page loads |
+
+### Pterodactyl Infrastructure Verification
+
+| # | Test | Result | Notes |
+|---|------|--------|-------|
+| 62 | Node online | PASS | Node "5.78.70.79" - 26,624MB RAM, 204,800MB disk |
+| 63 | Node allocations | PASS | 43 total allocations, 2 assigned, 41 free |
+| 64 | Servers running | PASS | 2 servers: Valheim (ID:7, 6GB), Hytale (ID:8, ~5.6GB) |
+| 65 | Users exist | PASS | 2 users: admin (rpuderak) + test (testymctesterson) |
+| 66 | Nests configured | PASS | 18 nests covering all game types |
+| 67 | ARK egg exists | PASS | Egg ID:20 "Ark: Survival Evolved" in Source Engine nest (ID:8) |
+| 68 | Garry's Mod egg | PASS | Egg ID:21 "Garrys Mod" in Source Engine nest (ID:8) |
+
+### Billing Portal Auth Tests
+
+| # | Test | URL | HTTP Code | Result | Notes |
+|---|------|-----|-----------|--------|-------|
+| 69 | Admin panel | /admin | 302 | PASS | Redirects to login (auth required) |
+| 70 | Create ticket | /tickets/create | 302 | PASS | Redirects to login (auth required) |
+| 71 | Tickets list | /tickets | 302 | PASS | Redirects to login (auth required) |
+| 72 | Services list | /services | 302 | PASS | Redirects to login (auth required) |
+| 73 | Forgot password | /forgot-password | 404 | NEEDS CHECK | URL may differ in Paymenter v2 (Livewire handles auth) |
+
+### Nginx Redirect Verification (Complete)
+
+| # | Test | From | To | HTTP Code | Result |
+|---|------|------|----|-----------|--------|
+| 74 | Root | billing.pocketburrito.ca/ | pocketburrito.ca | 301 | PASS |
+| 75 | Products listing | billing.pocketburrito.ca/products/game-servers | pocketburrito.ca/games | 301 | PASS |
+| 76 | Product slug | billing.pocketburrito.ca/products/game-servers/minecraft | pocketburrito.ca/games/minecraft | 301 | PASS |
+| 77 | Checkout preserved | billing.pocketburrito.ca/products/game-servers/minecraft/checkout | NOT redirected | 200 | PASS |
+
+### Pterodactyl Nest & Egg Coverage
+
+| # | Nest ID | Nest Name | Has Egg | Matches Game |
+|---|---------|-----------|---------|--------------|
+| 78 | 1 | Minecraft | Yes | Minecraft |
+| 79 | 4 | Rust | Yes | Rust |
+| 80 | 5 | Valheim | Yes | Valheim |
+| 81 | 8 | Source Engine | Yes (ARK, GMod) | ARK + Garry's Mod |
+| 82 | 10 | Satisfactory | Yes | Satisfactory |
+| 83 | 11 | Palworld | Yes | Palworld |
+| 84 | 12 | Project Zomboid | Yes | Project Zomboid |
+| 85 | 13 | Enshrouded | Yes | Enshrouded |
+| 86 | 14 | 7 Days to Die | Yes | 7 Days to Die |
+| 87 | 15 | Sons of the Forest | Yes | Sons of the Forest |
+| 88 | 16 | V Rising | Yes | V Rising |
+| 89 | 17 | Terraria | Yes | Terraria |
+| 90 | 18 | Factorio | Yes | Factorio |
+| 91 | 19 | Core Keeper | Yes | Core Keeper |
+| 92 | 20 | ECO | Yes | ECO |
+
+**Note:** Nests 6 (Abiotic Factor), 7 (Hytale), 9 (Voice Servers) exist but have no corresponding products on the Astro site. These may be for future use or testing.
+
+---
+
 ## Recommendations
 
 1. **Immediate:** Create terms.astro, privacy.astro, and refund.astro pages with real legal content
-2. **Short-term:** Standardize refund URL across both sites
-3. **Short-term:** Remove Twitter link from billing theme or create the account
-4. **Maintenance:** Update LINK_MAPPING.md to reflect actual URL patterns
-5. **Testing Note:** Checkout pages use Livewire (Laravel) and require JavaScript to fully render - WebFetch static testing shows "Loading..." states which resolve in-browser
+2. **Immediate:** Fix ARK slug mismatch - rename Paymenter product slug from "ark" to "ark-survival-evolved"
+3. **Immediate:** Investigate and fix Valheim checkout redirect to empty cart
+4. **Short-term:** Standardize refund URL across both sites
+5. **Short-term:** Remove Twitter link from billing theme or create the account
+6. **Maintenance:** Update LINK_MAPPING.md to reflect actual URL patterns
+7. **Testing Note:** Checkout pages use Livewire (Laravel) and require JavaScript to fully render - WebFetch static testing shows "Loading..." states which resolve in-browser
+8. **Future:** Nests for Abiotic Factor, Hytale, and Voice Servers exist in Pterodactyl but have no matching products - consider adding or cleaning up

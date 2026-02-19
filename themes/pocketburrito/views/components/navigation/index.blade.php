@@ -6,8 +6,8 @@
     });
 @endphp
 
-<nav class="w-full bg-[#0a0a1f]/95 backdrop-blur-xl border-b border-[#8b5cf6]/20 h-14 flex items-center fixed top-0 z-20">
-    <div class="w-full max-w-[1400px] mx-auto px-4 lg:px-8 flex items-center justify-between h-14"
+<nav class="w-full bg-[#0a0e1a]/95 backdrop-blur-sm border-b border-gray-800 h-16 flex items-center fixed top-0 z-50">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16"
         x-data="{
             slideOverOpen: false,
             hasAside: !!document.getElementById('main-aside')
@@ -17,48 +17,25 @@
         {{-- Left: Logo --}}
         <a href="https://pocketburrito.ca" class="flex items-center gap-2 shrink-0">
             <x-logo class="h-8" />
-            <span class="text-lg font-bold bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">PocketBurrito</span>
+            <span class="text-xl font-bold bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text text-transparent">PocketBurrito</span>
         </a>
 
         {{-- Right: Nav Links + Button grouped (matches pocketburrito.ca layout) --}}
         <div class="hidden md:flex items-center gap-6">
-            <a href="https://pocketburrito.ca" class="text-sm font-medium text-gray-100 hover:text-white transition-colors">
+            <a href="https://pocketburrito.ca" class="text-gray-300 hover:text-white transition">
                 Home
             </a>
-            <a href="https://pocketburrito.ca/games" class="text-sm font-medium text-gray-100 hover:text-white transition-colors">
+            <a href="https://pocketburrito.ca/games" class="text-gray-300 hover:text-white transition">
                 Games
             </a>
 
-            {{-- Shop dropdown for Paymenter categories --}}
-            @foreach ($shopLinks as $nav)
-            <div class="relative">
-                <x-dropdown>
-                    <x-slot:trigger>
-                        <span class="flex items-center text-sm font-medium text-gray-100 hover:text-white transition-colors cursor-pointer">
-                            {{ $nav['name'] }}
-                            <svg class="w-3.5 h-3.5 ml-1 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </span>
-                    </x-slot:trigger>
-                    <x-slot:content>
-                        @foreach ($nav['children'] as $child)
-                        <x-navigation.link
-                            :href="$child['url']"
-                            :spa="isset($child['spa']) ? $nav['spa'] : true">
-                            {{ $child['name'] }}
-                        </x-navigation.link>
-                        @endforeach
-                    </x-slot:content>
-                </x-dropdown>
-            </div>
-            @endforeach
-
-            <a href="https://pocketburrito.ca/pricing" class="text-sm font-medium text-gray-100 hover:text-white transition-colors">
+            <a href="https://pocketburrito.ca/pricing" class="text-gray-300 hover:text-white transition">
                 Pricing
             </a>
-            <a href="https://pocketburrito.ca/docs" class="text-sm font-medium text-gray-100 hover:text-white transition-colors">
+            <a href="https://pocketburrito.ca/docs" class="text-gray-300 hover:text-white transition">
                 Docs
             </a>
-            <a href="https://panel.pocketburrito.ca" class="text-sm font-medium text-gray-100 hover:text-white transition-colors">
+            <a href="https://panel.pocketburrito.ca" class="text-gray-300 hover:text-white transition">
                 Panel Login
             </a>
 
@@ -87,7 +64,7 @@
             </x-dropdown>
             @else
             <livewire:components.cart />
-            <a href="{{ route('home') }}" wire:navigate class="px-5 py-2 text-sm font-semibold text-white bg-primary hover:bg-primary/80 rounded-full transition-colors">
+            <a href="{{ route('home') }}" wire:navigate class="bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-[#6366f1]/50 transition">
                 Order Now
             </a>
             @endif
@@ -116,38 +93,27 @@
                 x-show="slideOverOpen"
                 @keydown.window.escape="slideOverOpen=false"
                 x-cloak
-                class="fixed left-0 right-0 top-14 w-full z-[99]"
-                style="height:calc(100dvh - 3.5rem);"
+                class="fixed left-0 right-0 top-16 w-full z-[99]"
+                style="height:calc(100dvh - 4rem);"
                 aria-modal="true"
                 tabindex="-1">
                 <div
                     x-show="slideOverOpen"
                     @click.away="slideOverOpen = false"
                     x-transition.opacity.duration.300ms
-                    class="absolute inset-0 bg-[#0a0a1f] border-t border-[#8b5cf6]/20 shadow-lg overflow-y-auto flex flex-col">
+                    class="absolute inset-0 bg-[#0a0e1a] border-t border-gray-800 shadow-lg overflow-y-auto flex flex-col">
 
                     <div class="flex flex-col h-full p-6">
                         <div class="flex-1 min-h-0 overflow-y-auto space-y-1">
-                            <a href="https://pocketburrito.ca" class="block px-4 py-3 text-base font-medium text-white hover:text-[#8b5cf6] transition-colors rounded-lg hover:bg-white/5">Home</a>
-                            <a href="https://pocketburrito.ca/games" class="block px-4 py-3 text-base font-medium text-white hover:text-[#8b5cf6] transition-colors rounded-lg hover:bg-white/5">Games</a>
+                            <a href="https://pocketburrito.ca" class="block px-4 py-3 text-base font-medium text-white hover:text-white transition-colors rounded-lg hover:bg-white/5">Home</a>
+                            <a href="https://pocketburrito.ca/games" class="block px-4 py-3 text-base font-medium text-white hover:text-white transition-colors rounded-lg hover:bg-white/5">Games</a>
 
-                            @foreach ($shopLinks as $nav)
-                            <div class="border-b border-[#8b5cf6]/10 pb-2 mb-2">
-                                <span class="block px-4 py-2 text-xs font-semibold uppercase text-[#9ca3af] tracking-wider">{{ $nav['name'] }}</span>
-                                @foreach ($nav['children'] as $child)
-                                <a href="{{ $child['url'] }}" @if(!str_contains($child['url'], '#')) wire:navigate @endif class="block px-4 py-2 text-sm text-[#9ca3af] hover:text-[#8b5cf6] transition-colors">
-                                    {{ $child['name'] }}
-                                </a>
-                                @endforeach
-                            </div>
-                            @endforeach
-
-                            <a href="https://pocketburrito.ca/pricing" class="block px-4 py-3 text-base font-medium text-white hover:text-[#8b5cf6] transition-colors rounded-lg hover:bg-white/5">Pricing</a>
-                            <a href="https://pocketburrito.ca/docs" class="block px-4 py-3 text-base font-medium text-white hover:text-[#8b5cf6] transition-colors rounded-lg hover:bg-white/5">Docs</a>
-                            <a href="https://panel.pocketburrito.ca" class="block px-4 py-3 text-base font-medium text-white hover:text-[#8b5cf6] transition-colors rounded-lg hover:bg-white/5">Panel Login</a>
+                            <a href="https://pocketburrito.ca/pricing" class="block px-4 py-3 text-base font-medium text-white hover:text-white transition-colors rounded-lg hover:bg-white/5">Pricing</a>
+                            <a href="https://pocketburrito.ca/docs" class="block px-4 py-3 text-base font-medium text-white hover:text-white transition-colors rounded-lg hover:bg-white/5">Docs</a>
+                            <a href="https://panel.pocketburrito.ca" class="block px-4 py-3 text-base font-medium text-white hover:text-white transition-colors rounded-lg hover:bg-white/5">Panel Login</a>
                         </div>
 
-                        <div class="mt-4 pt-4 border-t border-[#8b5cf6]/10">
+                        <div class="mt-4 pt-4 border-t border-gray-800">
                             @if(auth()->check())
                             <div class="flex gap-3 items-center mb-4">
                                 <img src="{{ auth()->user()->avatar }}" class="size-10 rounded-full border border-neutral bg-background" alt="avatar" />
@@ -158,11 +124,11 @@
                             </div>
                             <div class="space-y-1">
                                 @foreach (\App\Classes\Navigation::getAccountDropdownLinks() as $nav)
-                                <a href="{{ $nav['url'] }}" wire:navigate class="block px-4 py-2 text-sm text-[#9ca3af] hover:text-[#8b5cf6] transition-colors">
+                                <a href="{{ $nav['url'] }}" wire:navigate class="block px-4 py-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
                                     {{ $nav['name'] }}
                                 </a>
                                 @endforeach
-                                <a href="https://panel.pocketburrito.ca" class="block px-4 py-2 text-sm text-[#9ca3af] hover:text-[#8b5cf6] transition-colors">
+                                <a href="https://panel.pocketburrito.ca" class="block px-4 py-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
                                     Control Panel
                                 </a>
                                 <div class="pt-2">
@@ -176,7 +142,7 @@
                                         Login
                                     </x-button.secondary>
                                 </a>
-                                <a href="{{ route('home') }}" wire:navigate class="w-full text-center px-5 py-3 text-sm font-semibold text-white bg-primary hover:bg-primary/80 rounded-full transition-colors">
+                                <a href="{{ route('home') }}" wire:navigate class="block bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white px-6 py-2 rounded-lg font-semibold text-center">
                                     Order Now
                                 </a>
                             </div>

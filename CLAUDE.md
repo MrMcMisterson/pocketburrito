@@ -84,7 +84,7 @@ echo 'REDACTED_PASSWORD' | sudo -S command 2>/dev/null
   - Children: one per tier (env_variable = RAM in MiB, e.g., "3072" for 3GB)
   - Each child has its own plan with FULL price (not price difference)
   - Product's own plan is set to "free" type (base plan is $0, config option adds full price)
-- **Valheim** is the only single-tier game: product ID 54, plan ID 59, $14.99 recurring
+- **Valheim** is single-tier but uses same ConfigOption pattern: product ID 54, one config option child (6GB RAM, $14.99/month)
 - All products have Pterodactyl server settings (nest_id, egg_id, memory, disk, etc.)
 
 ### How Server Creation Works

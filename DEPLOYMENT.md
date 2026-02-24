@@ -32,9 +32,9 @@ scp themes/pocketburrito/views/FILE.blade.php rpuderak@5.78.100.72:/tmp/
 
 # SSH in and move with sudo
 ssh rpuderak@5.78.100.72
-echo 'REDACTED_PASSWORD' | sudo -S cp /tmp/FILE.blade.php /var/www/paymenter/paymenter/themes/pocketburrito/views/FILE.blade.php
-echo 'REDACTED_PASSWORD' | sudo -S chown www-data:www-data /var/www/paymenter/paymenter/themes/pocketburrito/views/FILE.blade.php
-echo 'REDACTED_PASSWORD' | sudo -S php /var/www/paymenter/paymenter/artisan view:clear
+echo "$SUDO_PASS" | sudo -S cp /tmp/FILE.blade.php /var/www/paymenter/paymenter/themes/pocketburrito/views/FILE.blade.php
+echo "$SUDO_PASS" | sudo -S chown www-data:www-data /var/www/paymenter/paymenter/themes/pocketburrito/views/FILE.blade.php
+echo "$SUDO_PASS" | sudo -S php /var/www/paymenter/paymenter/artisan view:clear
 ```
 
 ## Server Configuration
@@ -45,20 +45,20 @@ echo 'REDACTED_PASSWORD' | sudo -S php /var/www/paymenter/paymenter/artisan view
 
 After Nginx changes:
 ```bash
-echo 'REDACTED_PASSWORD' | sudo -S nginx -t && echo 'REDACTED_PASSWORD' | sudo -S systemctl reload nginx
+echo "$SUDO_PASS" | sudo -S nginx -t && echo "$SUDO_PASS" | sudo -S systemctl reload nginx
 ```
 
 ### Paymenter maintenance
 ```bash
 # Clear caches
-echo 'REDACTED_PASSWORD' | sudo -S php /var/www/paymenter/paymenter/artisan config:clear
-echo 'REDACTED_PASSWORD' | sudo -S php /var/www/paymenter/paymenter/artisan cache:clear
-echo 'REDACTED_PASSWORD' | sudo -S php /var/www/paymenter/paymenter/artisan view:clear
+echo "$SUDO_PASS" | sudo -S php /var/www/paymenter/paymenter/artisan config:clear
+echo "$SUDO_PASS" | sudo -S php /var/www/paymenter/paymenter/artisan cache:clear
+echo "$SUDO_PASS" | sudo -S php /var/www/paymenter/paymenter/artisan view:clear
 ```
 
 ### Database queries
 ```bash
-echo 'REDACTED_PASSWORD' | sudo -S mysql -u root paymenter -e "SELECT * FROM products LIMIT 5;" 2>/dev/null
+echo "$SUDO_PASS" | sudo -S mysql -u root paymenter -e "SELECT * FROM products LIMIT 5;" 2>/dev/null
 ```
 
 ## Adding a New Game

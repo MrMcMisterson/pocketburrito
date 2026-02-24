@@ -14,7 +14,12 @@ set -euo pipefail
 BACKUP_DIR="/backups"
 DATE=$(date +%Y%m%d_%H%M%S)
 RETAIN_DAYS=30
-SUDO_PASS="REDACTED_PASSWORD"
+# Read sudo password from environment variable
+# Set via: export SUDO_PASS="your-password" or in crontab environment
+if [ -z "${SUDO_PASS:-}" ]; then
+    echo "ERROR: SUDO_PASS environment variable not set" >&2
+    exit 1
+fi
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"

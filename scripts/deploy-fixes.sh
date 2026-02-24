@@ -3,7 +3,12 @@
 # Run on server: bash /tmp/deploy-fixes.sh
 
 set -e
-SUDO_PASS='REDACTED_PASSWORD'
+
+# Read sudo password from environment or prompt
+if [ -z "$SUDO_PASS" ]; then
+    read -s -p "Enter sudo password: " SUDO_PASS
+    echo
+fi
 
 echo "=== Step 1: Clean up orphaned services (product_id IS NULL) ==="
 echo "$SUDO_PASS" | sudo -S mysql -u root paymenter -e "SELECT id, product_id, status FROM services WHERE product_id IS NULL;" 2>/dev/null

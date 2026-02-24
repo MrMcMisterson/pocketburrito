@@ -38,10 +38,10 @@ pocketburrito.ca (Cloudflare Pages)     billing.pocketburrito.ca (Paymenter)
 ## Server Access
 
 - **SSH**: `ssh rpuderak@5.78.100.72`
-- **Sudo password**: `REDACTED_PASSWORD`
-- **Paymenter admin**: `https://billing.pocketburrito.ca/admin` (same password)
+- **Sudo password**: *(stored locally, not in repo — see local `.env` or password manager)*
+- **Paymenter admin**: `https://billing.pocketburrito.ca/admin`
 - **Pterodactyl admin**: `https://panel.pocketburrito.ca/admin`
-- **Pterodactyl API key**: `REDACTED_API_KEY`
+- **Pterodactyl API key**: *(stored locally, not in repo)*
 
 ## Key Server Paths
 
@@ -66,15 +66,16 @@ ssh rpuderak@5.78.100.72 "sed -i 's/\r$//' /tmp/script.sh && bash /tmp/script.sh
 
 Inside scripts, use this sudo pattern:
 ```bash
-echo 'REDACTED_PASSWORD' | sudo -S command 2>/dev/null
+echo "$SUDO_PASS" | sudo -S command 2>/dev/null
 ```
+*(Set `SUDO_PASS` from environment variable or prompt — never hardcode credentials in scripts)*
 
 ## Database
 
 - **MySQL** on the server, accessible as root (with sudo password)
 - **Paymenter DB**: `paymenter`
 - **Pterodactyl DB**: `panel`
-- Query pattern: `echo 'REDACTED_PASSWORD' | sudo -S mysql -u root paymenter -e "SQL_HERE" 2>/dev/null`
+- Query pattern: `echo "$SUDO_PASS" | sudo -S mysql -u root paymenter -e "SQL_HERE" 2>/dev/null`
 
 ## Product Structure (Paymenter)
 
@@ -154,7 +155,7 @@ ssh rpuderak@5.78.100.72 "bash /home/rpuderak/deploy-theme.sh"
 ```
 Or SCP files directly and clear view cache:
 ```bash
-echo 'REDACTED_PASSWORD' | sudo -S php /var/www/paymenter/paymenter/artisan view:clear
+echo "$SUDO_PASS" | sudo -S php /var/www/paymenter/paymenter/artisan view:clear
 ```
 
 ### Add a new game
@@ -169,7 +170,7 @@ echo 'REDACTED_PASSWORD' | sudo -S php /var/www/paymenter/paymenter/artisan view
 ```bash
 # SCP a PHP script, fix line endings, execute with Paymenter's artisan
 scp script.php rpuderak@5.78.100.72:/tmp/script.php
-ssh rpuderak@5.78.100.72 "sed -i 's/\r$//' /tmp/script.php && echo 'REDACTED_PASSWORD' | sudo -S php /tmp/script.php 2>/dev/null"
+ssh rpuderak@5.78.100.72 "sed -i 's/\r$//' /tmp/script.php && echo \"\$SUDO_PASS\" | sudo -S php /tmp/script.php 2>/dev/null"
 ```
 
 ## GitHub Issues

@@ -56,6 +56,9 @@
                         {{ $nav['name'] }}
                     </x-navigation.link>
                     @endforeach
+                    <a href="{{ route('services') }}" wire:navigate class="block px-3 py-2 text-sm text-base hover:text-primary transition-colors">
+                        Services
+                    </a>
                     <a href="https://panel.pocketburrito.ca" class="block px-3 py-2 text-sm text-base hover:text-primary transition-colors">
                         Control Panel
                     </a>
@@ -128,6 +131,9 @@
                                     {{ $nav['name'] }}
                                 </a>
                                 @endforeach
+                                <a href="{{ route('services') }}" wire:navigate class="block px-4 py-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
+                                    Services
+                                </a>
                                 <a href="https://panel.pocketburrito.ca" class="block px-4 py-2 text-sm text-[#9ca3af] hover:text-white transition-colors">
                                     Control Panel
                                 </a>

@@ -66,7 +66,9 @@
                 </x-slot:content>
             </x-dropdown>
             @else
-            <livewire:components.cart />
+            <a href="{{ route('login') }}" class="text-gray-300 hover:text-white transition">
+                My Account
+            </a>
             <a href="{{ route('home') }}" wire:navigate class="bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-[#6366f1]/50 transition">
                 Order Now
             </a>
@@ -143,10 +145,8 @@
                             </div>
                             @else
                             <div class="flex flex-col gap-3">
-                                <a href="{{ route('login') }}" wire:navigate>
-                                    <x-button.secondary class="w-full">
-                                        Login
-                                    </x-button.secondary>
+                                <a href="{{ route('login') }}" wire:navigate class="block text-[#9ca3af] hover:text-white transition-colors text-center">
+                                    My Account
                                 </a>
                                 <a href="{{ route('home') }}" wire:navigate class="block bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white px-6 py-2 rounded-lg font-semibold text-center">
                                     Order Now

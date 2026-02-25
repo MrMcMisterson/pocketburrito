@@ -1,11 +1,11 @@
 <div>
     {{-- Hero Section - matches pocketburrito.ca --}}
     <div class="relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-[#0a0a1f] via-[#13132b] to-[#1a0a2e]"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#8b5cf6]/10 via-transparent to-transparent"></div>
-        <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#050810] via-[#0a0e1a] to-[#0a0e1a]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6366f1]/10 via-transparent to-transparent"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
             <h1 class="text-4xl lg:text-6xl font-bold mb-6">
-                <span class="bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">Premium Game Server</span>
+                <span class="bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text text-transparent">Premium Game Server</span>
                 <br>
                 <span class="text-white">Hosting Made Easy</span>
             </h1>
@@ -24,19 +24,19 @@
             {{-- Stats --}}
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-3xl mx-auto">
                 <div class="text-center">
-                    <div class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">99.9%</div>
+                    <div class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text text-transparent">99.9%</div>
                     <div class="text-sm text-muted mt-1">Uptime</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">15+</div>
+                    <div class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text text-transparent">15+</div>
                     <div class="text-sm text-muted mt-1">Games</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">24/7</div>
+                    <div class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text text-transparent">24/7</div>
                     <div class="text-sm text-muted mt-1">Support</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">< 60s</div>
+                    <div class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text text-transparent">< 60s</div>
                     <div class="text-sm text-muted mt-1">Setup Time</div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
     </div>
 
     {{-- Services Section --}}
-    <div id="services" class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div id="services" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-base mb-3">Our Services</h2>
             <p class="text-muted">Choose from our range of game server hosting solutions</p>
@@ -78,13 +78,13 @@
 
     {{-- CTA Section --}}
     <div class="relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-[#8b5cf6] via-[#a855f7] to-[#ec4899]"></div>
-        <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#8b5cf6]"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
             <h2 class="text-3xl font-bold text-white mb-4">Ready to Start Gaming?</h2>
             <p class="text-white/80 max-w-xl mx-auto mb-8">
                 Join thousands of gamers hosting their servers with us. Setup takes less than 60 seconds.
             </p>
-            <a href="#services" class="inline-block px-8 py-3 text-[#8b5cf6] font-semibold bg-white rounded-lg hover:bg-white/90 transition-colors">
+            <a href="#services" class="inline-block px-8 py-3 text-[#6366f1] font-semibold bg-white rounded-lg hover:bg-white/90 transition-colors">
                 Create Your Server Now
             </a>
         </div>

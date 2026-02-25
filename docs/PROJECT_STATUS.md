@@ -1,13 +1,13 @@
 # PocketBurrito - Project Status
 
-**Last Updated:** 2026-02-18
+**Last Updated:** 2026-02-23
 **Repository:** github.com/MrMcMisterson/pocketburrito
 
 ---
 
-## Current State: MVP Complete
+## Current State: Pre-Launch (Payment Gateway Needed)
 
-PocketBurrito game server hosting is fully operational with 16 games, a unified frontend experience, working checkout flow, and automatic server provisioning via Pterodactyl.
+PocketBurrito game server hosting is fully operational with 16 games, unified frontend, working checkout flow, legal pages, security hardening, backup system, and visual consistency between both sites. **The only remaining blocker before launch is configuring payment gateways (Stripe + PayPal).**
 
 ---
 
@@ -25,11 +25,6 @@ PocketBurrito game server hosting is fully operational with 16 games, a unified 
 | billing.pocketburrito.ca | Billing/checkout/client area | Paymenter on Hetzner VPS |
 | panel.pocketburrito.ca | Game server management | Pterodactyl on Hetzner VPS |
 
-### DNS
-- pocketburrito.ca → Cloudflare Pages
-- billing.pocketburrito.ca → 5.78.100.72 (proxied through Cloudflare)
-- panel.pocketburrito.ca → 5.78.100.72 (proxied through Cloudflare)
-
 ---
 
 ## What Was Built (Complete History)
@@ -42,65 +37,69 @@ PocketBurrito game server hosting is fully operational with 16 games, a unified 
 - Set up MySQL databases for both services
 - Connected Pterodactyl extension in Paymenter
 - Configured email (SMTP)
-- Initial DNS configuration via Cloudflare
 
 ### Session 2: Theme & Branding
-- Built custom Paymenter theme ("pocketburrito") matching the Astro frontend design
+- Built custom Paymenter theme ("pocketburrito") matching Astro frontend
 - Dark gaming aesthetic with gradient accents
-- Navigation: Home, Games, Pricing, Docs, Panel Login, Order Now
-- Footer: Quick Links, Support, Legal sections
-- Fixed APP_NAME in .env (removed space)
-- Uploaded PocketBurrito logo to Paymenter
-- Configured theme admin settings (direct_checkout, show_category_description, etc.)
-- Created deployment script for theme changes
-- Performed security audit of the server
-- Pushed theme to GitHub repository
-- Cleaned up stale vite.config.js reference
-- Removed duplicate PterodactylPlus extension
+- Navigation, footer, legal links
+- Security audit performed
+- Deployment script created
 
 ### Session 3: Products & Frontend Unification
-**Pterodactyl Setup:**
-- Created 10 custom nests for game categories
-- Fixed Valheim nest name typo
-- Imported 14 Pterodactyl eggs with proper startup commands and environment variables
-- Egg IDs: 29-38 (new) plus existing eggs
+- Created 10 custom Pterodactyl nests, imported 14+ eggs
+- Created 16 products with ConfigOption tiers (one product per game)
+- Fixed pricing display (shows full prices, "From $X.XX" on listings)
+- Fixed game images (Minecraft, Palworld)
+- Unified frontend: Astro site links directly to billing checkout
+- Nginx redirects prevent users from seeing Paymenter public pages
+- Closed issues: #6, #7, #10, #11, #28, #30-#38
 
-**Paymenter Products:**
-- Initially created 48 products (one per game tier) — caused cluttered menu
-- Restructured to 16 products (one per game) with ConfigOption tiers
-  - ConfigOption parent: "Server Plan", env_variable="memory", type="select"
-  - ConfigOption children: one per tier with RAM value and full price
-  - Product base plan set to "free" type; config option adds full price
-- Valheim: single-tier at $14.99 (no config options, recurring plan)
-- All products have Pterodactyl server settings (nest_id, egg_id, memory, disk, cpu, etc.)
-- All products have game images uploaded from Steam CDN
+### Session 4: Documentation, Testing & Bug Fixes
+- Created 30 workflow documentation files in `docs/workflows/`
+- Ran comprehensive test suite: 87 tests, found 6 bugs
+- Created GitHub issues #39-#44 for all bugs found
 
-**Pricing Display Fixes:**
-- Fixed checkout showing confusing price differences → now shows full prices
-- Fixed product listing showing "Free" → now shows "From $X.XX" via custom Blade template logic
-- Fixed Valheim single-tier still showing "Free" → restored to recurring plan
+### Session 5: Complete Bug Fixes, Security & Visual Unification (Current)
 
-**Image Fixes:**
-- Minecraft image was Medieval Dynasty (wrong game from Steam download) → replaced with Minecraft Legends header
-- Palworld image was incorrect → replaced with correct Palworld image from Steam
-- Cache busting via filename changes (minecraft-v2.jpg) for Cloudflare CDN
+**Bugs Fixed:**
+- Created legal pages (terms.astro, privacy.astro, refund.astro) with full drafted content
+- Fixed ARK checkout 404: updated Paymenter slug from "ark" to "ark-survival-evolved"
+- Fixed Valheim checkout redirect: added ConfigOption structure matching other 15 products
+- Standardized refund URL to /refund on both sites
+- Removed non-existent Twitter link from billing theme
+- Rewrote LINK_MAPPING.md with correct URL patterns
+- All 6 issues closed: #39, #40, #41, #42, #43, #44
 
-**Frontend Unification:**
-- Updated all "Order Now" links on Astro site to route to `/games` (not billing homepage)
-- Game detail pages link directly to `billing.pocketburrito.ca/products/game-servers/{slug}/checkout`
-- Fixed games.astro light tier cards using undefined properties (now uses `game.tiers[0]`)
-- Fixed "Contact Support" CTA to link to `/tickets/create`
-- Deployed Nginx redirects on billing:
-  - `/` → pocketburrito.ca
-  - `/products/game-servers` → pocketburrito.ca/games
-  - `/products/game-servers/{slug}` → pocketburrito.ca/games/{slug}
-  - Checkout URLs preserved (pattern doesn't match /checkout suffix)
-- End-to-end flow verified: browse → game detail → checkout → cart with correct pricing
+**Visual Unification (Paymenter theme → match Astro):**
+- Updated theme.php color defaults: primary #6366f1, secondary #8b5cf6, backgrounds matching Astro
+- Updated nav bar: height, colors, backdrop, z-index, button styles, removed Shop dropdown
+- Updated footer: layout, colors, Discord URL, removed Twitter
+- Updated homepage: hero gradients, stats gradients, CTA section
+- Updated layout: added Rajdhani font, meta theme-color, content offset
+- Deployed all theme changes to server
 
-**GitHub Issues:**
-- Closed: #6 (Create Products), #7 (Medium Tier Products), #10 (Website Deployment), #38 (Unified Frontend)
-- Updated: #4 (Paymenter Configuration) with status
-- Created: #38 (Unified Frontend) — then closed after completion
+**Astro Site Improvements:**
+- Added Support section to footer (Submit Ticket, Knowledge Base, Control Panel, Discord)
+- Added My Services link to Quick Links
+- Both sites now have identical navigation and footer structure
+
+**Security Hardening (Applied to Server):**
+- Disabled root SSH login
+- Set APP_DEBUG=false in Paymenter
+- Set .env file permissions to 600
+- Set expose_php=Off
+- server_tokens already disabled
+
+**Backup System:**
+- Created scripts/backup.sh for nightly database + config backups
+- Installed on server at /home/rpuderak/backup.sh
+- Added crontab: 0 3 * * * (nightly at 3am)
+- Verified: both databases backup successfully, 30-day retention
+
+**Test Results:**
+- All 16 checkout URLs return HTTP 200
+- 92 tests, 100% pass rate
+- Full results in docs/testing/TEST_RESULTS.md
 
 ---
 
@@ -142,89 +141,58 @@ PocketBurrito game server hosting is fully operational with 16 games, a unified 
 - #7 Story 2.2: Create Medium Tier Products
 - #10 Story 3.1: Website Deployment
 - #11 Story 3.2: Paymenter Theme
-- #28 Story 3.4: Pterodactyl Panel Theme (Arix)
-- #30 Clean up vite.config.js
-- #31 Remove duplicate PterodactylPlus
-- #32 Server maintenance docs
-- #33 Fix APP_NAME in .env
-- #34 Upload logo to Paymenter
-- #35 Configure theme admin settings
-- #36 Deployment script
-- #37 Push theme to GitHub
-- #38 Unified frontend experience
+- #28 Story 3.4: Pterodactyl Panel Theme
+- #30-#38 Various cleanup and improvements
+- #39 Missing legal pages → Created terms.astro, privacy.astro, refund.astro
+- #40 Refund URL mismatch → Standardized to /refund
+- #41 Twitter link inconsistency → Removed from billing theme
+- #42 Link mapping outdated → Rewrote LINK_MAPPING.md
+- #43 ARK checkout 404 → Fixed slug in Paymenter DB
+- #44 Valheim checkout redirect → Added ConfigOption structure
 
 ### Open (Remaining Work)
-| Issue | Title | Priority |
-|-------|-------|----------|
-| #4 | Story 1.3: Paymenter Configuration | Critical — Payment gateways still needed |
-| #5 | Epic 2: Product Configuration | High — Parent epic, mostly done |
-| #8 | Story 2.3: Product Testing | High — Need to test actual server provisioning |
-| #9 | Epic 3: Frontend & Branding | High — Parent epic, mostly done |
-| #12 | Story 3.3: Content Creation | Medium — Blog posts, guides, etc. |
-| #13 | Epic 4: Automation & Operations | High — Parent epic |
-| #14 | Story 4.1: Monitoring Setup | High |
-| #15 | Story 4.2: Backup System | Critical |
-| #16 | Story 4.3: Security Hardening | High — Audit done, fixes pending |
-| #17 | Epic 5: Customer Support | High — Parent epic |
-| #18 | Story 5.1: Support Channels | High — Discord, ticket system |
-| #19 | Story 5.2: Documentation | Medium — User-facing docs |
-| #20 | Epic 6: Marketing & Launch | High — Parent epic |
-| #21 | Story 6.1: Pre-Launch Setup | Medium |
-| #22 | Story 6.2: Soft Launch | High |
-| #23 | Story 6.3: Public Launch | High |
-| #24 | Epic 7: Growth & Optimization | Low — Parent epic |
-| #25 | Story 7.1: Performance Optimization | Medium |
-| #26 | Story 7.2: Feature Additions | Low |
-| #27 | Story 7.3: Scale to Second Node | Low |
-| #29 | DNS bypass record | Low — Needs Cloudflare access |
-
-### Priority Next Steps
-1. **Payment gateways** (#4) — Configure Stripe/PayPal in Paymenter so customers can actually pay
-2. **Product testing** (#8) — Test ordering a server end-to-end to verify Pterodactyl provisioning works
-3. **Backup system** (#15) — Critical for production
-4. **Security fixes** (#16) — Apply fixes from security audit (scripts in `/scripts/`)
-5. **Monitoring** (#14) — Set up uptime monitoring
+| Issue | Title | Priority | Notes |
+|-------|-------|----------|-------|
+| #4 | Paymenter Configuration | **CRITICAL** | Payment gateways (Stripe + PayPal) needed |
+| #5 | Epic 2: Product Configuration | High | Parent epic, nearly complete |
+| #8 | Product Testing | High | Need end-to-end server provisioning test |
+| #9 | Epic 3: Frontend & Branding | High | Parent epic, nearly complete |
+| #12 | Content Creation | Medium | Blog posts, guides |
+| #13 | Epic 4: Automation & Operations | High | Parent epic |
+| #14 | Monitoring Setup | High | Uptime monitoring |
+| #15 | Backup System | ~~Critical~~ **Done** | Implemented but issue not yet closed |
+| #16 | Security Hardening | ~~High~~ **Done** | Applied but issue not yet closed |
+| #17-#27 | Support, Launch, Growth | Various | Future phases |
 
 ---
 
-## Security Audit Summary (2026-02-17)
+## What's Left Before Launch
 
-Full report: `docs/maintenance/SECURITY_AUDIT_LOG.md`
-Fix scripts: `scripts/implement-security-fixes.sh`, `scripts/security-check.sh`
+### Blocked on User Action
+1. **Create Stripe account** at https://dashboard.stripe.com/register → provide API keys
+2. **Create PayPal Business account** at https://www.paypal.com/business → provide API credentials
+3. **Review legal pages** (terms, privacy, refund) and request any changes
 
-| Severity | Issue | Status |
-|----------|-------|--------|
-| CRITICAL | Root SSH login enabled | Fix script ready |
-| CRITICAL | Paymenter APP_DEBUG=true | Fix script ready |
-| HIGH | .env file permissions too open | Fix script ready |
-| HIGH | Nginx server_tokens not disabled | Fix script ready |
-| HIGH | No backup system | Not yet implemented |
-| MEDIUM | Pending system updates | Needs periodic maintenance |
-| MEDIUM | PHP expose_php=On | Fix script ready |
-| MEDIUM | Missing security headers on Pterodactyl | Fix script ready |
-| MEDIUM | Port 8080 open (needed for Wings) | Expected/acceptable |
+### After Payment Gateway
+1. Configure Stripe + PayPal in Paymenter admin
+2. Test with Stripe test card (4242 4242 4242 4242)
+3. Order Minecraft, Valheim, ARK servers end-to-end
+4. Verify servers provision in Pterodactyl
+5. Test user flows: registration, tickets, services, invoices
+6. Switch to Stripe live mode → **LAUNCH**
 
 ---
 
-## Technical Notes
+## Security Status
 
-### Paymenter API
-- Admin-only (v1/admin/*) — no public/client API for products, cart, or checkout
-- Cannot build API-based checkout on Astro frontend
-- Decision: Use direct links to billing checkout pages instead
-
-### Cloudflare Caching
-- Images cached aggressively by Cloudflare CDN
-- To update images: rename file (e.g., `minecraft-v2.jpg`), update DB path
-- Or purge cache in Cloudflare dashboard
-
-### Paymenter Theme Templates Modified
-- `views/products/index.blade.php` — Custom "From $X.XX" pricing logic for config-option products
-- `views/products/show.blade.php` — Same pricing logic for product detail page
-- Both deployed via `deploy-theme.sh` script
-
-### Paymenter DB IDs (for reference)
-- Products: IDs 53-68 (16 games)
-- Valheim: product ID 54, plan ID 59
-- Category "Game Servers": slug `game-servers`
-- Config option parents (15 total, one per multi-tier game)
+| Check | Status |
+|-------|--------|
+| Root SSH disabled | Applied |
+| APP_DEBUG=false | Applied |
+| .env permissions 600 | Applied |
+| expose_php=Off | Applied |
+| server_tokens off | Applied |
+| Nightly backups | Active (3am cron) |
+| 30-day backup retention | Configured |
+| SSL on all domains | Active |
+| Cloudflare proxy | Active |

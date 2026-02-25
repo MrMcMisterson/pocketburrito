@@ -1,6 +1,6 @@
 # PocketBurrito Link Mapping
 
-Last updated: 2026-02-17
+Last updated: 2026-02-19
 
 ## Navigation Links (Both Sites)
 
@@ -11,7 +11,7 @@ Last updated: 2026-02-17
 | Pricing | `/pricing` | `https://pocketburrito.ca/pricing` | OK |
 | Docs | `/docs` | `https://pocketburrito.ca/docs` | OK |
 | Panel Login | `https://panel.pocketburrito.ca` | `https://panel.pocketburrito.ca` | OK |
-| Order Now | `https://billing.pocketburrito.ca` | `route('home')` (billing homepage) | OK |
+| Order Now | `/games` | `route('home')` (billing homepage) | OK |
 
 ## Footer Quick Links
 
@@ -21,6 +21,16 @@ Last updated: 2026-02-17
 | Pricing | `/pricing` | `https://pocketburrito.ca/pricing` | OK |
 | Documentation | `/docs` | `https://pocketburrito.ca/docs` | OK |
 | Client Area | `https://billing.pocketburrito.ca` | `route('home')` | OK |
+| My Services | `https://billing.pocketburrito.ca/services` | N/A (in nav dropdown) | OK |
+
+## Footer Support Links (Both Sites)
+
+| Link Text | Astro | Billing | Status |
+|-----------|-------|---------|--------|
+| Submit Ticket | `https://billing.pocketburrito.ca/tickets/create` | `route('tickets')` (auth-gated) | OK |
+| Knowledge Base | `/docs` | `https://pocketburrito.ca/docs` | OK |
+| Control Panel | `https://panel.pocketburrito.ca` | `https://panel.pocketburrito.ca` | OK |
+| Discord Community | `https://discord.gg/gjjGWYY7` | `https://discord.gg/gjjGWYY7` | OK |
 
 ## Footer Legal Links
 
@@ -28,53 +38,34 @@ Last updated: 2026-02-17
 |-----------|-------|---------|--------|
 | Terms of Service | `/terms` | `https://pocketburrito.ca/terms` | OK |
 | Privacy Policy | `/privacy` | `https://pocketburrito.ca/privacy` | OK |
-| Refund Policy | `/refund` | `https://pocketburrito.ca/refunds` | MISMATCH - Astro uses /refund, billing uses /refunds |
+| Refund Policy | `/refund` | `https://pocketburrito.ca/refund` | OK (standardized to /refund) |
 
 ## Footer Social Links
 
 | Platform | Astro | Billing | Status |
 |----------|-------|---------|--------|
-| Discord | `https://discord.gg/gjjGWYY7` | `https://discord.gg/gjjGWYY7` | OK (pending real invite link) |
-| Twitter | (removed - no account) | `https://twitter.com/pocketburrito` | MISMATCH - billing has it, Astro removed it |
+| Discord | `https://discord.gg/gjjGWYY7` | `https://discord.gg/gjjGWYY7` | OK |
 
-## Footer Differences
+## Checkout Links (games/[slug].astro)
 
-The billing site footer has an additional **Support** column:
-- Submit Ticket (auth-gated)
-- Knowledge Base (links to /docs)
-- Control Panel (links to panel.pocketburrito.ca)
-- Discord Community
-
-The Astro site footer does not have this column (appropriate since support features are on the billing site).
-
-## Page-Specific Links
-
-### docs.astro
 | Link | Destination | Status |
 |------|-------------|--------|
-| Join Discord | `https://discord.gg/gjjGWYY7` | FIXED (was yourgaminghost) |
-| Open Ticket | `https://billing.pocketburrito.ca/tickets/create` | FIXED (was submitticket.php) |
+| Order Now buttons | `https://billing.pocketburrito.ca/products/game-servers/{slug}/checkout` | OK |
 
-### games/[slug].astro
-| Link | Destination | Status |
-|------|-------------|--------|
-| Order buttons | `https://billing.pocketburrito.ca/order/{slug}` | OK |
-| Tier buttons | `https://billing.pocketburrito.ca/order/{slug}-{tier}` | OK |
+All 16 games use the same URL pattern. Tier selection happens on the Paymenter checkout page via ConfigOption dropdown.
 
-### index.astro
-| Link | Destination | Status |
-|------|-------------|--------|
-| Order Now (hero) | `https://billing.pocketburrito.ca` | OK |
-| Browse Games | `/games` | OK |
-| View All Games | `/games` | OK |
-| CTA Order | `https://billing.pocketburrito.ca` | OK |
+## Nginx Redirects (billing.pocketburrito.ca)
 
-### pricing.astro
-| Link | Destination | Status |
-|------|-------------|--------|
-| Get Started | `https://billing.pocketburrito.ca` | OK |
+| From | To | Status |
+|------|----|--------|
+| `/` | `https://pocketburrito.ca` | 301 OK |
+| `/products/game-servers` | `https://pocketburrito.ca/games` | 301 OK |
+| `/products/game-servers/{slug}` | `https://pocketburrito.ca/games/{slug}` | 301 OK |
+| `/products/game-servers/{slug}/checkout` | NOT redirected (preserved) | OK |
 
-## Action Items
-1. Decide on `/refund` vs `/refunds` route naming and make consistent
-2. Update Discord links once real invite is available
-3. Consider adding Twitter/X link to Astro footer if account exists
+## Resolved Issues
+- `/refund` vs `/refunds` mismatch: Standardized to `/refund` on both sites
+- Twitter link removed from billing footer (no account exists)
+- Discord URL standardized to `https://discord.gg/gjjGWYY7` on both sites
+- Support section added to Astro footer (was previously only on billing)
+- My Services link added to Astro Quick Links

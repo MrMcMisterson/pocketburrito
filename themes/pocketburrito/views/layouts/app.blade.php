@@ -12,10 +12,10 @@
         @endisset
     </title>
 
-    {{-- Inter Font --}}
+    {{-- Inter + Rajdhani Fonts (matching pocketburrito.ca) --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 
     @livewireStyles
     @vite(['themes/' . config('settings.theme') . '/js/app.js', 'themes/' . config('settings.theme') . '/css/app.css'], config('settings.theme'))
@@ -37,7 +37,7 @@
     <meta content="{{ $image }}" name="image">
     @endisset
 
-    <meta name="theme-color" content="#8b5cf6">
+    <meta name="theme-color" content="#6366f1">
     <meta name="description" content="Premium game server hosting with instant setup, DDoS protection, and 24/7 support.">
 
     {!! hook('head') !!}
@@ -58,7 +58,7 @@
         <x-navigation.sidebar title="$title" />
         @endif
         <div class="{{ (isset($sidebar) && $sidebar) ? 'md:ml-64 rtl:ml-0 rtl:md:mr-64' : '' }} flex flex-col flex-grow overflow-auto">
-            <main class="mt-14 grow">
+            <main class="pt-16 grow">
                 {{ $slot }}
             </main>
             <x-notification />

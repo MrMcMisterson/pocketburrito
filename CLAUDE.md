@@ -38,10 +38,10 @@ pocketburrito.ca (Cloudflare Pages)     billing.pocketburrito.ca (Paymenter)
 ## Server Access
 
 - **SSH**: `ssh rpuderak@5.78.100.72`
-- **Sudo password**: `Water Coast Hand 1!`
-- **Paymenter admin**: `https://billing.pocketburrito.ca/admin` (same password)
+- **Sudo password**: *(stored locally, not in repo — see local `.env` or password manager)*
+- **Paymenter admin**: `https://billing.pocketburrito.ca/admin`
 - **Pterodactyl admin**: `https://panel.pocketburrito.ca/admin`
-- **Pterodactyl API key**: `ptla_VkqorXDAVTCjdunVrwg3KX9DYfXGweVoK998VUGUYzJ`
+- **Pterodactyl API key**: *(stored locally, not in repo)*
 
 ## Key Server Paths
 
@@ -66,15 +66,16 @@ ssh rpuderak@5.78.100.72 "sed -i 's/\r$//' /tmp/script.sh && bash /tmp/script.sh
 
 Inside scripts, use this sudo pattern:
 ```bash
-echo 'Water Coast Hand 1!' | sudo -S command 2>/dev/null
+echo "$SUDO_PASS" | sudo -S command 2>/dev/null
 ```
+*(Set `SUDO_PASS` from environment variable or prompt — never hardcode credentials in scripts)*
 
 ## Database
 
 - **MySQL** on the server, accessible as root (with sudo password)
 - **Paymenter DB**: `paymenter`
 - **Pterodactyl DB**: `panel`
-- Query pattern: `echo 'Water Coast Hand 1!' | sudo -S mysql -u root paymenter -e "SQL_HERE" 2>/dev/null`
+- Query pattern: `echo "$SUDO_PASS" | sudo -S mysql -u root paymenter -e "SQL_HERE" 2>/dev/null`
 
 ## Product Structure (Paymenter)
 
@@ -84,7 +85,7 @@ echo 'Water Coast Hand 1!' | sudo -S command 2>/dev/null
   - Children: one per tier (env_variable = RAM in MiB, e.g., "3072" for 3GB)
   - Each child has its own plan with FULL price (not price difference)
   - Product's own plan is set to "free" type (base plan is $0, config option adds full price)
-- **Valheim** is the only single-tier game: product ID 54, plan ID 59, $14.99 recurring
+- **Valheim** is single-tier but uses same ConfigOption pattern: product ID 54, one config option child (6GB RAM, $14.99/month)
 - All products have Pterodactyl server settings (nest_id, egg_id, memory, disk, etc.)
 
 ### How Server Creation Works
@@ -154,7 +155,7 @@ ssh rpuderak@5.78.100.72 "bash /home/rpuderak/deploy-theme.sh"
 ```
 Or SCP files directly and clear view cache:
 ```bash
-echo 'Water Coast Hand 1!' | sudo -S php /var/www/paymenter/paymenter/artisan view:clear
+echo "$SUDO_PASS" | sudo -S php /var/www/paymenter/paymenter/artisan view:clear
 ```
 
 ### Add a new game
@@ -169,7 +170,7 @@ echo 'Water Coast Hand 1!' | sudo -S php /var/www/paymenter/paymenter/artisan vi
 ```bash
 # SCP a PHP script, fix line endings, execute with Paymenter's artisan
 scp script.php rpuderak@5.78.100.72:/tmp/script.php
-ssh rpuderak@5.78.100.72 "sed -i 's/\r$//' /tmp/script.php && echo 'Water Coast Hand 1!' | sudo -S php /tmp/script.php 2>/dev/null"
+ssh rpuderak@5.78.100.72 "sed -i 's/\r$//' /tmp/script.php && echo \"\$SUDO_PASS\" | sudo -S php /tmp/script.php 2>/dev/null"
 ```
 
 ## GitHub Issues

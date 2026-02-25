@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { allGames } from '../data/games';
+import { gameWiki } from '../data/gameWiki';
+
+const gamesWithGuides = allGames.filter(game => gameWiki[game.slug]);
 ---
 
 <Layout title="Documentation - PocketBurrito" description="Learn how to set up and manage your game server with our comprehensive guides.">
@@ -90,48 +94,68 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Common Tasks -->
+  <!-- Game Guides -->
   <section class="py-16 bg-gaming-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-gaming font-bold text-white mb-4">Game Guides</h2>
+      <p class="text-gray-400 mb-8">Detailed setup instructions, configuration, and troubleshooting for each game we host.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {gamesWithGuides.map(game => (
+          <a href={`/docs/${game.slug}`} class="bg-gaming-darker border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition group">
+            <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-gaming-accent transition">{game.name}</h3>
+            <p class="text-gray-400 text-sm mb-4 line-clamp-2">{game.description}</p>
+            <span class="text-gaming-accent text-sm font-medium group-hover:text-gaming-purple transition">
+              View Guide →
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Tasks -->
+  <section class="py-16 bg-gaming-darker">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-gaming font-bold text-white mb-8">Common Tasks</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
           <h3 class="text-lg font-semibold text-white mb-2">Installing Mods</h3>
           <p class="text-gray-400 mb-4">
             Upload mod files via the File Manager or use one-click installers for popular modpacks.
           </p>
         </div>
 
-        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
           <h3 class="text-lg font-semibold text-white mb-2">Managing Backups</h3>
           <p class="text-gray-400 mb-4">
             Automatic daily backups are created. Restore or download backups from the Backups tab.
           </p>
         </div>
 
-        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
           <h3 class="text-lg font-semibold text-white mb-2">Editing Config Files</h3>
           <p class="text-gray-400 mb-4">
             Use the built-in text editor in File Manager to modify server configuration files.
           </p>
         </div>
 
-        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
           <h3 class="text-lg font-semibold text-white mb-2">Adding Admins</h3>
           <p class="text-gray-400 mb-4">
             Grant sub-users access to your server from the Users tab in the control panel.
           </p>
         </div>
 
-        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
           <h3 class="text-lg font-semibold text-white mb-2">Viewing Console</h3>
           <p class="text-gray-400 mb-4">
             Monitor server output and send commands via the Console tab in real-time.
           </p>
         </div>
 
-        <div class="bg-gaming-darker border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
+        <div class="bg-gaming-dark border border-gray-800 rounded-lg p-6 hover:border-gaming-accent transition">
           <h3 class="text-lg font-semibold text-white mb-2">Changing Server Settings</h3>
           <p class="text-gray-400 mb-4">
             Adjust RAM allocation, port numbers, and startup parameters from the Settings tab.

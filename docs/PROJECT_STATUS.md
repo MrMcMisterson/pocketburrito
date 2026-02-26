@@ -1,6 +1,6 @@
 # PocketBurrito - Project Status
 
-**Last Updated:** 2026-02-23
+**Last Updated:** 2026-02-26
 **Repository:** github.com/MrMcMisterson/pocketburrito
 
 ---
@@ -59,7 +59,7 @@ PocketBurrito game server hosting is fully operational with 16 games, unified fr
 - Ran comprehensive test suite: 87 tests, found 6 bugs
 - Created GitHub issues #39-#44 for all bugs found
 
-### Session 5: Complete Bug Fixes, Security & Visual Unification (Current)
+### Session 5: Complete Bug Fixes, Security & Visual Unification
 
 **Bugs Fixed:**
 - Created legal pages (terms.astro, privacy.astro, refund.astro) with full drafted content
@@ -100,6 +100,37 @@ PocketBurrito game server hosting is fully operational with 16 games, unified fr
 - All 16 checkout URLs return HTTP 200
 - 92 tests, 100% pass rate
 - Full results in docs/testing/TEST_RESULTS.md
+
+### Session 6: Checkout Fix & Service Cancellation
+
+**Critical Fix: Queue Worker Down (Root Cause)**
+- Paymenter queue worker (`paymenter.service`) had been crashed since Feb 7 (2.5 weeks)
+- Server creation jobs were queuing but never executing — services got created in Paymenter but no Pterodactyl servers were provisioned
+- Restarted `systemctl reset-failed paymenter.service && systemctl restart paymenter.service`
+- All 32 pending jobs processed; Terraria server created successfully
+
+**Missing Environment Variables Fixed**
+- Enshrouded server creation failed: egg requires `QUERY_PORT` (Steam Query Port) but product settings didn't include it
+- Added missing required env vars for 5 products:
+  - Enshrouded: `QUERY_PORT=15637`
+  - Palworld: `ADMIN_PASSWORD=changeme`
+  - Project Zomboid: `ADMIN_PASSWORD=changeme`
+  - Rust: `RCON_PASS=changeme`
+  - ECO: `WEB_PORT=3001`
+- Re-dispatched Enshrouded CreateJob — server created successfully
+
+**Service Cancellation Fix**
+- All 18 product plans were set to `type=free` (pricing came from ConfigOption tiers)
+- The `cancellable` attribute excludes `free` plans, so Cancel button never appeared
+- Changed all product plans from `free` to `recurring` with $0 base price
+- Cancel button now visible and functional on all service pages
+
+**Null-Safety Fixes**
+- Fixed `services/widget.blade.php`: `$service->product->name` → `$service->product?->name ?? 'Unknown Product'`
+- Fixed `services/widget.blade.php`: `$service->product->category->name` → `$service->product?->category?->name ?? 'N/A'`
+- Fixed `services/show.blade.php`: same null-safe patterns applied
+
+**Result**: Both checkout flow and service cancellation now working end-to-end.
 
 ---
 

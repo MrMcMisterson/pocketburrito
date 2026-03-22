@@ -2,148 +2,52 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Privacy Policy - PocketBurrito">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h1 class="text-4xl font-gaming font-bold text-white mb-2">Privacy Policy</h1>
-    <p class="text-gray-400 mb-10">Last updated: February 19, 2026</p>
+<Layout title="Privacy Policy">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-white mb-2">Privacy Policy</h1>
+      <p class="text-gray-500 mb-10">Last updated: March 22, 2026</p>
 
-    <div class="prose prose-invert max-w-none space-y-8">
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">1. Overview</h2>
-        <p class="text-gray-300 leading-relaxed">
-          PocketBurrito ("we", "us", "our") respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and share your information when you use our game server hosting services at pocketburrito.ca, billing.pocketburrito.ca, and panel.pocketburrito.ca.
-        </p>
-      </section>
+      <div class="space-y-8 text-gray-300 leading-relaxed">
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-3">1. Overview</h2>
+          <p>PocketBurrito ("we", "us") is a tech product recommendation site. This policy explains what data we collect and how we use it.</p>
+        </section>
 
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">2. Information We Collect</h2>
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-3">2. Information We Collect</h2>
+          <p>PocketBurrito is a static website. We do not require accounts, logins, or personal information. We may collect:</p>
+          <ul class="list-disc list-inside mt-2 space-y-1 text-gray-400">
+            <li>Standard web server logs (IP address, browser type, pages visited)</li>
+            <li>Analytics data through privacy-respecting tools</li>
+          </ul>
+        </section>
 
-        <h3 class="text-xl font-semibold text-white mt-6 mb-3">Account Information</h3>
-        <p class="text-gray-300 leading-relaxed">When you create an account, we collect:</p>
-        <ul class="list-disc list-inside text-gray-300 mt-2 space-y-1">
-          <li>Full name</li>
-          <li>Email address</li>
-          <li>Phone number (optional)</li>
-          <li>Billing address (street, city, province/state, postal code, country)</li>
-          <li>Account password (stored securely hashed)</li>
-        </ul>
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-3">3. Amazon Associates Program</h2>
+          <p>PocketBurrito is a participant in the Amazon Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by linking to Amazon.ca. When you click an affiliate link and make a purchase, we may earn a commission at no additional cost to you.</p>
+        </section>
 
-        <h3 class="text-xl font-semibold text-white mt-6 mb-3">Payment Information</h3>
-        <p class="text-gray-300 leading-relaxed">
-          Payment card details are processed directly by our payment providers (Stripe and PayPal). We do not store your full credit card number, CVV, or PayPal password on our servers. We may store a payment method identifier and the last four digits of your card for reference.
-        </p>
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-3">4. Cookies</h2>
+          <p>We use minimal cookies for basic site functionality. Amazon may set cookies when you visit product pages through our affiliate links. These cookies are governed by <a href="https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ" class="text-orange-400 hover:text-orange-300 transition">Amazon's Privacy Policy</a>.</p>
+        </section>
 
-        <h3 class="text-xl font-semibold text-white mt-6 mb-3">Automatically Collected Information</h3>
-        <ul class="list-disc list-inside text-gray-300 mt-2 space-y-1">
-          <li>IP address (for security, fraud prevention, and server access)</li>
-          <li>Browser type and version</li>
-          <li>Pages visited and time spent on our sites</li>
-          <li>Server access logs (connections to your game server)</li>
-        </ul>
-      </section>
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-3">5. Third-Party Links</h2>
+          <p>Our site contains links to Amazon.ca and other external websites. We are not responsible for the privacy practices of those sites. We encourage you to read their privacy policies.</p>
+        </section>
 
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">3. How We Use Your Information</h2>
-        <ul class="list-disc list-inside text-gray-300 space-y-1">
-          <li>To provision and manage your game servers</li>
-          <li>To process payments and send invoices</li>
-          <li>To provide customer support via tickets and Discord</li>
-          <li>To send service notifications (server status, billing reminders)</li>
-          <li>To detect and prevent fraud and abuse</li>
-          <li>To comply with legal obligations</li>
-        </ul>
-        <p class="text-gray-300 leading-relaxed mt-3">
-          We do not sell your personal information. We do not use your data for advertising purposes.
-        </p>
-      </section>
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-3">6. Changes</h2>
+          <p>We may update this policy from time to time. Changes will be posted on this page with an updated date.</p>
+        </section>
 
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">4. Third-Party Services</h2>
-        <p class="text-gray-300 leading-relaxed">We use the following third-party services that may process your data:</p>
-
-        <div class="mt-4 space-y-4">
-          <div class="bg-gaming-dark rounded-lg p-4">
-            <h4 class="font-semibold text-white">Cloudflare</h4>
-            <p class="text-gray-400 text-sm">CDN, DDoS protection, and DNS. Processes your IP address and web traffic. <a href="https://www.cloudflare.com/privacypolicy/" class="text-gaming-accent hover:text-gaming-purple transition">Privacy Policy</a></p>
-          </div>
-          <div class="bg-gaming-dark rounded-lg p-4">
-            <h4 class="font-semibold text-white">Stripe</h4>
-            <p class="text-gray-400 text-sm">Payment processing. Handles your payment card details securely. <a href="https://stripe.com/privacy" class="text-gaming-accent hover:text-gaming-purple transition">Privacy Policy</a></p>
-          </div>
-          <div class="bg-gaming-dark rounded-lg p-4">
-            <h4 class="font-semibold text-white">PayPal</h4>
-            <p class="text-gray-400 text-sm">Payment processing. Handles PayPal transactions. <a href="https://www.paypal.com/webapps/mpp/ua/privacy-full" class="text-gaming-accent hover:text-gaming-purple transition">Privacy Policy</a></p>
-          </div>
-          <div class="bg-gaming-dark rounded-lg p-4">
-            <h4 class="font-semibold text-white">Hetzner Cloud</h4>
-            <p class="text-gray-400 text-sm">Server infrastructure hosting. Your game servers and data are stored on Hetzner infrastructure. <a href="https://www.hetzner.com/legal/privacy-policy" class="text-gaming-accent hover:text-gaming-purple transition">Privacy Policy</a></p>
-          </div>
-          <div class="bg-gaming-dark rounded-lg p-4">
-            <h4 class="font-semibold text-white">Google reCAPTCHA</h4>
-            <p class="text-gray-400 text-sm">Bot protection on login forms. May collect browser and usage data. <a href="https://policies.google.com/privacy" class="text-gaming-accent hover:text-gaming-purple transition">Privacy Policy</a></p>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">5. Cookies</h2>
-        <p class="text-gray-300 leading-relaxed">
-          We use essential cookies to maintain your login session and preferences. We do not use tracking cookies or third-party advertising cookies. Cloudflare may set cookies for security and performance purposes.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">6. Data Retention</h2>
-        <p class="text-gray-300 leading-relaxed">
-          We retain your account data for as long as your account is active. After account deletion or service termination, we may retain certain data for up to 90 days for legal and accounting purposes. Server data (game files, worlds, configurations) is deleted within 30 days of service termination. Payment records are retained as required by tax and accounting regulations.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">7. Data Security</h2>
-        <p class="text-gray-300 leading-relaxed">
-          We implement industry-standard security measures to protect your data, including SSL/TLS encryption for all web traffic, encrypted password storage, firewall protection, and regular security audits. However, no method of transmission or storage is 100% secure, and we cannot guarantee absolute security.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">8. Your Rights</h2>
-        <p class="text-gray-300 leading-relaxed">Depending on your jurisdiction, you may have the right to:</p>
-        <ul class="list-disc list-inside text-gray-300 mt-2 space-y-1">
-          <li>Access the personal data we hold about you</li>
-          <li>Request correction of inaccurate data</li>
-          <li>Request deletion of your data</li>
-          <li>Object to or restrict processing of your data</li>
-          <li>Request a copy of your data in a portable format</li>
-          <li>Withdraw consent where processing is based on consent</li>
-        </ul>
-        <p class="text-gray-300 leading-relaxed mt-3">
-          To exercise any of these rights, please contact us through our support ticket system.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">9. Children's Privacy</h2>
-        <p class="text-gray-300 leading-relaxed">
-          Our Service is not directed to children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us so we can delete it.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">10. Changes to This Policy</h2>
-        <p class="text-gray-300 leading-relaxed">
-          We may update this Privacy Policy from time to time. We will notify you of significant changes by posting a notice on our website and updating the "Last updated" date at the top of this page.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-4">11. Contact</h2>
-        <p class="text-gray-300 leading-relaxed">
-          If you have questions about this Privacy Policy or your personal data, please contact us through our
-          <a href="https://billing.pocketburrito.ca/tickets/create" class="text-gaming-accent hover:text-gaming-purple transition">support ticket system</a>
-          or join our <a href="https://discord.gg/gjjGWYY7" class="text-gaming-accent hover:text-gaming-purple transition">Discord community</a>.
-        </p>
-      </section>
+        <section>
+          <h2 class="text-xl font-semibold text-white mb-3">7. Contact</h2>
+          <p>Questions? Reach out on Twitter at <a href="https://x.com/TechinSeconds" class="text-orange-400 hover:text-orange-300 transition">@TechinSeconds</a>.</p>
+        </section>
+      </div>
     </div>
-  </div>
+  </section>
 </Layout>
